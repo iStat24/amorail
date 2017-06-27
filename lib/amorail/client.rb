@@ -48,17 +48,23 @@ module Amorail
       send(method, url, params)
     end
 
-    def get(url, params = {})
+    def get(url, params_in = {})
+      headers = (params_in[:headers]) ? params_in.slice(:headers)[:headers] : nil
+      params  = params_in.slice( *params_in.keys.map { |x| (x == :headers) ? nil : x } )      
       response = connect.get(url, params) do |request|
         request.headers['Cookie'] = cookies if cookies.present?
+        headers&.each { |k, v| request.headers[k.to_s] = v.to_s }
       end
       handle_response(response)
     end
 
-    def post(url, params = {})
+    def post(url, params_in = {})
+      headers = (params_in[:headers]) ? params_in.slice(:headers)[:headers] : nil
+      params  = params_in.slice( *params_in.keys.map { |x| (x == :headers) ? nil : x } )
       response = connect.post(url) do |request|
         request.headers['Cookie'] = cookies if cookies.present?
         request.headers['Content-Type'] = 'application/json'
+        headers&.each { |k, v| request.headers[k.to_s] = v.to_s }
         request.body = params.to_json
       end
       handle_response(response)
