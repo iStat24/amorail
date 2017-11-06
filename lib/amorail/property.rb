@@ -116,7 +116,7 @@ module Amorail
         hash = {}
         data.fetch('task_types', []).each do |tt|
           prop_item = PropertyItem.new(tt)
-          identifier = tt['name'].presence || tt['code'].presence
+          identifier = tt['code'].presence || tt['name'].presence
           next if identifier.nil?
           hash[identifier.downcase] = prop_item
           hash[identifier] = prop_item
