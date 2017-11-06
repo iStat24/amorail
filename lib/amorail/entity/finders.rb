@@ -41,8 +41,12 @@ module Amorail # :nodoc: all
       def load_many(response)
         return [] unless response.status == 200
 
-        (response.body['response'][amo_response_name] || [])
+        (body_response(response)[amo_response_name] || [])
           .map { |info| new.reload_model(info) }
+      end
+
+      def body_response(response)
+        response.body['response']
       end
     end
 

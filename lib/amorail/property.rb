@@ -48,7 +48,7 @@ module Amorail
     end
 
     attr_reader :client, :data, :contacts,
-                :company, :leads, :tasks
+                :company, :leads, :tasks, :users
 
     def initialize(client)
       @client = client
@@ -89,6 +89,10 @@ module Amorail
       self.source_name = 'companies'
     end
 
+    class User < PropertyItem
+      self.source_name = 'users'
+    end
+
     class Lead < PropertyItem
       self.source_name = 'leads'
 
@@ -112,7 +116,7 @@ module Amorail
         hash = {}
         data.fetch('task_types', []).each do |tt|
           prop_item = PropertyItem.new(tt)
-          identifier = tt['code'].presence || tt['name'].presence
+          identifier = tt['name'].presence || tt['code'].presence
           next if identifier.nil?
           hash[identifier.downcase] = prop_item
           hash[identifier] = prop_item

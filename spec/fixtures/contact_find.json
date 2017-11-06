@@ -36,6 +36,26 @@
             ]
           }
         ]
+      },
+      {
+        "id": 102,
+        "name": "Foo bar 2",
+        "account_id": "8195968",
+        "last_modified": 1423139150,
+        "company_name": "Foo Inc.",
+        "custom_fields": [
+          {
+            "id": "1460591",
+            "name": "Email",
+            "code": "EMAIL",
+            "values": [
+              {
+                "value": "foo2@tb.com",
+                "enum": "3392098"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
