@@ -11,6 +11,10 @@ module Amorail
     attr_config :usermail,
                 :api_key,
                 :api_endpoint,
+                :access_token,
+                :client_id,
+                :client_secret,
+                :redirect_uri,
                 api_path: "/private/api/v2/json/",
                 short_api_path: "/api/",
                 auth_url: "/private/api/auth.php?type=json"
